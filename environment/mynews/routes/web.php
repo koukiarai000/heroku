@@ -16,13 +16,17 @@ Route::get('/', function () {
 });
 
 //ルーティング設定のグループ化
-Route::group(['prefix' =>'admin'],function(){
-    Route::get('news/create','Admin\NewsController@add')->middleware('auth');
+Route::group(['prefix' =>'admin','middleware' => 'auth'], function(){
+    Route::get('news/create','Admin\NewsController@add');
+    Route::post('news/create', 'Admin\NewsController@create'); #追記分
 });
 
-
-Route::get('admin/profile/create','Admin\ProfileController@add')->middleware('auth');
-Route::get('admin/profile/edit','Admin\ProfileController@edit')->middleware('auth');
+Route::group(['prefix' =>'admin','middleware' => 'auth' ], function() {
+    Route::get('profile/create','Admin\ProfileController@add');
+    Route::post('profile/create','Admin\ProfileController@create');
+    Route::get('profile/edit','Admin\ProfileController@edit');
+    Route::post('profile/edit','Admin\ProfileController@update');
+});
 
 Auth::routes();
 
