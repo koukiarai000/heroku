@@ -12,6 +12,7 @@
             <div class="col-md-8 mx-auto">
                 <h2>Myプロフィール</h2>
                 <form action="{{ action('Admin\ProfileController@create') }}" method="post" enctype="multipart/form-date">
+                    
                     @if(count($errors) >  0)
                     <ul>
                         @foreach($errors->all() as $e)
